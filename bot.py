@@ -17,4 +17,4 @@ async def film(bot, message):
         print(e)
         bot.send_message(chat_id, "bir hata oluştu")
       
-bot.run()
+Bot.run()
