@@ -11,7 +11,7 @@ async def film(bot, message):
     try:
         await bot.copy_message(
             chat_id=chat_id, 
-            from_chat_id=PRE_LOG, 
+            from_chat_id=FILM_DEPO, 
             message_id=message_id)
     except Exception as e:
         print(e)
