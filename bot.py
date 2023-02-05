@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO
 import random
-
+import asyncio
 
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
@@ -26,6 +26,7 @@ async def filmdongu(bot, message, id):
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="işlem Yapıyom")
+        await asyncio.sleep(5)
         await copy(bot, message, text, id)
     except Exception as e:
         print(e)
