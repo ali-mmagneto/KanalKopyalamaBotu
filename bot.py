@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO
+from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO
 import random
 
 
@@ -11,7 +11,7 @@ async def copy(bot, message, text, id):
         get_chat = await bot.get_chat(FILM_DEPO)
         print(get_chat.title)
         await bot.copy_message(
-            chat_id=message.chat.id, 
+            chat_id=DEPO, 
             from_chat_id=FILM_DEPO, 
             message_id=id)
         await text.delete()
@@ -33,7 +33,7 @@ async def filmdongu(bot, message, id):
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
     try:
-        id = 350
+        id = 152
         await filmdongu(bot, message, id)
     except Exception as e:
         print(e)
