@@ -23,7 +23,7 @@ async def filmdongu(bot, message, id):
     try:
         id += 1
         await asyncio.sleep(5)
-        await copy(bot, message, text, id)
+        await copy(bot, message, id)
     except Exception as e:
         print(e)
 
