@@ -13,7 +13,7 @@ async def copy(bot, message, message_id, text):
         await bot.copy_message(
             chat_id=message.chat.id, 
             from_chat_id=FILM_DEPO, 
-            message_id=message_id)
+            message_id=int(message_id))
         await text.delete()
         await filmdongu(bot, message)
     except Exception as e:
@@ -23,7 +23,7 @@ async def copy(bot, message, message_id, text):
 
 async def filmdongu(bot, message):
     try:
-        message_id = 153
+        message_id = [153] 
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="işlem Yapıyom")
