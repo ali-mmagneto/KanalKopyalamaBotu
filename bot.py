@@ -1,9 +1,9 @@
 from pyrogram import Client, filters
-from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO
+from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, STRING_SESSION
 import random
 
 Bot = Client("RandomFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-userbot = Client("FilmBot", api_id=APP_ID, api_hash=API_HASH, session_string=BOT_TOKEN)
+userbot = Client("FilmBot", api_id=APP_ID, api_hash=API_HASH, session_string=STRING_SESSION)
 
 @Bot.on_message(filters.command("film") & filters.private)
 async def film(bot, message):
