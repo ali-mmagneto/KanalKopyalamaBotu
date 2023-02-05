@@ -4,13 +4,12 @@ import random
 
 
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-
+message_id = 153
 
 async def copy(bot, message, text):
     try:
         get_chat = await bot.get_chat(FILM_DEPO)
         print(get_chat.title)
-        message_id = 153
         await bot.copy_message(
             chat_id=message.chat.id, 
             from_chat_id=FILM_DEPO, 
