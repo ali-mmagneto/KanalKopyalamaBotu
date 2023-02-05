@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO
+from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO, SON_MSG_ID, ILK_MSG_ID
 import random
 import asyncio
 
@@ -40,7 +40,6 @@ async def filmg(bot, message):
         await filmdongu(bot, message, id)
     except Exception as e:
         print(e)
-   
     
 Bot.run()
 
