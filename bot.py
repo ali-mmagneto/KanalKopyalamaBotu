@@ -10,7 +10,7 @@ async def film(bot, message):
     try:
         get_chat= await bot.get_chat(FILM_DEPO)
         print(get_chat.title)
-        message_id = random.randint(4, 1456)
+        message_id = random.randint(100, 283)
         await bot.copy_message(
             chat_id=message.chat.id, 
             from_chat_id=FILM_DEPO, 
