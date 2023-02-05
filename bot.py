@@ -18,9 +18,9 @@ async def copy(bot, message, id):
                 from_chat_id=FILM_DEPO, 
                 message_id=id)
             await filmdongu(bot, message, id)
-        except Exception as e:
-            print(e)
-            await bot.send_message(message.chat.id, f"bir hata oluştu `{e}`")
+    except Exception as e:
+        print(e)
+        await bot.send_message(message.chat.id, f"bir hata oluştu `{e}`")
 
 async def filmdongu(bot, message, id):
     try:
