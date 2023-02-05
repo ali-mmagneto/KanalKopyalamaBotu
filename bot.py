@@ -33,7 +33,7 @@ async def filmdongu(bot, message, message_id):
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
     try:
-        message_id = 152
+        message_id = [152]
         mesaage_id += 1
         await filmdongu(bot, message, message_id)
     except Exception as e:
