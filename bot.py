@@ -8,7 +8,7 @@ Bot = Client("RandomFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TO
 @Bot.on_message(filters.command("film") & filters.private)
 async def film(bot, message):
     try:
-        get_chat= await bot.get_chat(FILM_DEPO)
+        get_chat = await bot.get_chat(FILM_DEPO)
         print(get_chat.title)
         message_id = random.randint(100, 283)
         await bot.copy_message(
