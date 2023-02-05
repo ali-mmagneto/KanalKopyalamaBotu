@@ -5,7 +5,7 @@ import random
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 
-async def copy(bot, message, message_id):
+async def copy(bot, message, message_id, text):
     try:
         get_chat = await bot.get_chat(FILM_DEPO)
         print(get_chat.title)
@@ -13,6 +13,7 @@ async def copy(bot, message, message_id):
             chat_id=message.chat.id, 
             from_chat_id=FILM_DEPO, 
             message_id=message_id)
+        await text.delete()
     except Exception as e:
         print(e)
         await bot.send_message(message.chat.id, "bir hata oluştu")
@@ -22,11 +23,10 @@ async def copy(bot, message, message_id):
 async def filmg(bot, message):
     try:
         message_id = random.randint(153, 3554)
-        await bot.send_message(
+        text = await bot.send_message(
             chat_id=message.chat.id,
             text="işlem Yapıyom")
-        id=350
-        await copy(bot, message, message_id)
+        await copy(bot, message, message_id, text)
     except Exception as e:
         print(e)
    
