@@ -3,15 +3,15 @@ from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO
 import random
 
 Bot = Client("RandomFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-
+userbot = Client("FilmBot", api_id=APP_ID, api_hash=API_HASH, session_string=BOT_TOKEN)
 
 @Bot.on_message(filters.command("film") & filters.private)
 async def film(bot, message):
     try:
-        get_chat = await bot.get_chat(FILM_DEPO)
+        get_chat = await userbot.get_chat(FILM_DEPO)
         print(get_chat.title)
         message_id = random.randint(100, 283)
-        await bot.copy_message(
+        await userbot.copy_message(
             chat_id=message.chat.id, 
             from_chat_id=FILM_DEPO, 
             message_id=message_id)
@@ -20,3 +20,4 @@ async def film(bot, message):
         bot.send_message(message.chat.id, "bir hata oluştu")
       
 Bot.run()
+userbot.start()
