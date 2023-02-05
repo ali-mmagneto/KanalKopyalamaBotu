@@ -26,7 +26,7 @@ async def filmdongu(bot, message):
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="işlem Yapıyom")
-        id = 152
+        id = 330
         await copy(bot, message, text, id)
     except Exception as e:
         print(e)
