@@ -14,10 +14,22 @@ async def copy(bot, message, message_id, text):
             from_chat_id=FILM_DEPO, 
             message_id=message_id)
         await text.delete()
+        await filmsira(bot, message)
     except Exception as e:
         print(e)
         await bot.send_message(message.chat.id, "bir hata oluştu")
 
+
+async def filmsira(bot, message):
+    try:
+        message_id2 = 153
+        message_id = message_id2 + 1
+        text = await bot.send_message(
+            chat_id=message.chat.id,
+            text="işlem Yapıyom")
+        await copy(bot, message, message_id, text)
+    except Exception as e:
+        print(e)
 
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
