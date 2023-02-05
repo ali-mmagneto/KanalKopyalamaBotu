@@ -8,7 +8,7 @@ Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKE
 
 async def copy(bot, message, id):
     try:
-        if id = SON_MSG_ID:
+        if id > SON_MSG_ID:
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
             get_chat = await bot.get_chat(FILM_DEPO)
