@@ -21,11 +21,11 @@ async def copy(bot, message, id):
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
     try:
-        bot.send_message(
+        await bot.send_message(
             chat_id=message.chat.id,
             text="işlem Yapıyom")
         id=350
-        copy(bot, message, id)
+        await copy(bot, message, id)
     except Exception as e:
         print(e)
    
