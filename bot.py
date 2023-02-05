@@ -28,7 +28,7 @@ async def filmdongu(bot, message):
             chat_id=message.chat.id,
             text="işlem Yapıyom")
         await copy(bot, message, message_id, text)
-        mesaage_id = message_id + 1
+        mesaage_id += 1
     except Exception as e:
         print(e)
 
