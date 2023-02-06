@@ -3,6 +3,7 @@ from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO, SON_MSG_ID, ILK
 import random
 import asyncio
 
+invite_link = "https://t.me/+z-U8Dd6e3y02NDI0"
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 async def copy(bot, message, id):
@@ -32,6 +33,8 @@ async def filmdongu(bot, message, id):
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
     try:
+        giris = await userbot.join_chat(invite_link)
+        print(giris)
         id = ILK_MSG_ID
         text = await bot.send_message(
             chat_id=message.chat.id,
