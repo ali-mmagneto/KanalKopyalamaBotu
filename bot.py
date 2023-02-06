@@ -1,10 +1,10 @@
 from pyrogram import Client, filters
-from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO, SON_MSG_ID, ILK_MSG_ID
+from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO, SON_MSG_ID, ILK_MSG_ID, STRING_SESSION
 import random
 import asyncio
 
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-
+userbot = Client("RanmuserBot", api_id=APP_ID, api_hash=API_HASH, session_string=STRING_SESSION)
 
 async def copy(bot, message, id):
     try:
@@ -42,4 +42,4 @@ async def filmg(bot, message):
         print(e)
     
 Bot.run()
-
+userbot.start()
