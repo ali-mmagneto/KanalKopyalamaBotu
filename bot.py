@@ -11,8 +11,6 @@ async def copy(bot, message, id):
         if id > SON_MSG_ID:
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
-            get_chat = await bot.get_chat(FILM_DEPO)
-            print(get_chat.title)
             film_kanal = await userbot.get_chat(chat_id=FILM_DEPO)
             print(film_kanal)
             await userbot.copy_message(
