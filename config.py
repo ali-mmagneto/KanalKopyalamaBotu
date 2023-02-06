@@ -3,6 +3,7 @@ import os
 from os import environ
 
 BOT_TOKEN = environ.get("BOT_TOKEN", "")
+STRING_SESSION = environ.get("STRING_SESSION", "")
 FILM_DEPO = environ.get("FILM_DEPO", "") 
 DEPO = environ.get("DEPO", "")
 APP_ID = int(environ.get("APP_ID", 1234))
