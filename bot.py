@@ -1,9 +1,8 @@
 from pyrogram import Client, filters
-from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO, SON_MSG_ID, ILK_MSG_ID, userbot
+from config import BOT_TOKEN, APP_ID, API_HASH, FILM_DEPO, DEPO, SON_MSG_ID, ILK_MSG_ID
 import random
 import asyncio
 
-invite_link = "https://t.me/+z-U8Dd6e3y02NDI0"
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 async def copy(bot, message, id):
@@ -11,9 +10,9 @@ async def copy(bot, message, id):
         if id > SON_MSG_ID:
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
-            film_kanal = await userbot.get_chat(chat_id=FILM_DEPO)
+            film_kanal = await bot.get_chat(chat_id=FILM_DEPO)
             print(film_kanal)
-            await userbot.copy_message(
+            await bot.copy_message(
                 chat_id=DEPO, 
                 from_chat_id=FILM_DEPO, 
                 message_id=id)
@@ -33,8 +32,6 @@ async def filmdongu(bot, message, id):
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
     try:
-        giris = await userbot.join_chat(invite_link)
-        print(giris)
         id = ILK_MSG_ID
         text = await bot.send_message(
             chat_id=message.chat.id,
