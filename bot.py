@@ -13,7 +13,7 @@ async def copy(bot, message, id):
         else:
             get_chat = await bot.get_chat(FILM_DEPO)
             print(get_chat.title)
-            await bot.copy_message(
+            await userbot.copy_message(
                 chat_id=DEPO, 
                 from_chat_id=FILM_DEPO, 
                 message_id=id)
