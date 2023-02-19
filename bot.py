@@ -15,8 +15,8 @@ async def copy(bot, message, id, son_id, kanal_id):
             print(film_kanal)
             await bot.copy_message(
                 chat_id=DEPO, 
-                from_chat_id=kanal_id, 
-                message_id=id)
+                from_chat_id=int(kanal_id), 
+                message_id=int(id))
             await filmdongu(bot, message, id, son_id, kanal_id)
     except Exception as e:
         await message.reply_text(e)
