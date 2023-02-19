@@ -17,7 +17,7 @@ async def copy(bot, message, id, son_id, kanal_id):
                 chat_id=DEPO, 
                 from_chat_id=kanal_id, 
                 message_id=id)
-            await filmdongu(bot, message, id)
+            await filmdongu(bot, message, id, son_id, kanal_id)
     except Exception as e:
         print(e)
         await bot.send_message(message.chat.id, f"bir hata oluştu `{e}`")
@@ -40,6 +40,9 @@ async def filmg(bot, message):
         kanal_id = text[1]
         id = text[2]
         son_id = text[3]
+        print(kanal_id) 
+        print(id) 
+        print(son_id) 
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
