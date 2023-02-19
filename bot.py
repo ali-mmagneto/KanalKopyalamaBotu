@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from config import BOT_TOKEN, APP_ID, API_HASH, DEPO
 import random
 import asyncio
+from unidecode import unidecode
 
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
@@ -32,11 +33,11 @@ async def filmdongu(bot, message, id, son_id, kanal_id):
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
     try:
-        text = message.text.split(" ", 1)
+        text = unidecode(message.text).split()
         if len(text) < 4:
             await message.reply_text("Hatalı Kullanım")
             return
-        kanal_id = text[1 ]
+        kanal_id = text[1]
         id = text[2]
         son_id = text[3]
         text = await bot.send_message(
