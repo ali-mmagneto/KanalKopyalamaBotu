@@ -23,7 +23,7 @@ async def copy(bot, message, id, son_id, kanal_id):
 
 async def filmdongu(bot, message, id, son_id, kanal_id):
     try:
-        id += 1
+        int(id) += 1
         await asyncio.sleep(5)
         await copy(bot, message, id, son_id, kanal_id)
     except Exception as e:
@@ -36,7 +36,7 @@ async def filmg(bot, message):
         if len(text) < 4:
             await message.reply_text("Hatalı Kullanım")
             return
-        kanal_id = f"{text[1]}"
+        kanal_id = str(text[1])
         id = text[2]
         son_id = text[3]
         print(kanal_id) 
