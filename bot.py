@@ -19,8 +19,7 @@ async def copy(bot, message, id, son_id, kanal_id):
                 message_id=id)
             await filmdongu(bot, message, id, son_id, kanal_id)
     except Exception as e:
-        print(e)
-        await bot.send_message(message.chat.id, f"bir hata oluştu `{e}`")
+        await message.reply_text(e)
 
 async def filmdongu(bot, message, id, son_id, kanal_id):
     try:
@@ -28,7 +27,7 @@ async def filmdongu(bot, message, id, son_id, kanal_id):
         await asyncio.sleep(5)
         await copy(bot, message, id, son_id, kanal_id)
     except Exception as e:
-        print(e)
+        await message.reply_text(e)
 
 @Bot.on_message(filters.command("film") & filters.private)
 async def filmg(bot, message):
@@ -43,11 +42,12 @@ async def filmg(bot, message):
         print(kanal_id) 
         print(id) 
         print(son_id) 
+        await message.reply_text(f"@{kanal_id} {id} {son_id}")
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
         await filmdongu(bot, message, id, son_id, kanal_id)
     except Exception as e:
-        print(e)
+        await message.reply_text(e)
     
 Bot.run()
