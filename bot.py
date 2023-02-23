@@ -179,43 +179,54 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
         if int(id) > int(son_id):
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
-            chat_id = str(message.chat.id)
+            film_kanal = await userbot.get_chat(chat_id=kanal_id)
+            print(film_kanal.has_protected_content)
+            if film_kanal.has_protected_content == true:
+                chat_id = str(message.chat.id)
+                film_kanal = await userbot.get_chat(chat_id=kanal_id)
+                print(film_kanal)
+                msg = await userbot.get_messages(kanal_id, id)
+                caption = msg.caption
+                start_time = time.time()
+                video = await userbot.download_media(
+                    message = msg,
+                    progress=progress_bar,
+                    progress_args=("`İndiriliyor...`", text1, start_time))
+                duration = get_duration(video)
+                thumb_image_path = os.path.join(
+                    DOWNLOAD_DIR,
+                    chat_id,
+                    chat_id + ".jpg"
+                )
+                if os.path.exists(thumb_image_path):
+                    thumb = thumb_image_path
+                else:
+                    thumb = get_thumbnail(video, './' + DOWNLOAD_DIR, duration / 4)
+                width, height = get_width_height(video)
+                await userbot.send_video(
+                    chat_id = DEPO,
+                    progress = progress_bar, 
+                    progress_args = (
+                        'Dosyan Yükleniyor!',
+                        text1,
+                        start_time
+                        ),
+                    video = video,
+                    caption = caption,
+                    duration = duration,
+                    thumb = thumb,
+                    width = width,
+                    height = height,
+                    supports_streaming=True)
+                await filmdongug(bot, message, id, son_id, kanal_id, text1)
+        else:
             film_kanal = await userbot.get_chat(chat_id=kanal_id)
             print(film_kanal)
-            msg = await userbot.get_messages(kanal_id, id)
-            caption = msg.caption
-            start_time = time.time()
-            video = await userbot.download_media(
-                message = msg,
-                progress=progress_bar,
-                progress_args=("`İndiriliyor...`", text1, start_time))
-            duration = get_duration(video)
-            thumb_image_path = os.path.join(
-                DOWNLOAD_DIR,
-                chat_id,
-                chat_id + ".jpg"
-            )
-            if os.path.exists(thumb_image_path):
-                thumb = thumb_image_path
-            else:
-                thumb = get_thumbnail(video, './' + DOWNLOAD_DIR, duration / 4)
-            width, height = get_width_height(video)
-            await userbot.send_video(
-                chat_id = DEPO,
-                progress = progress_bar, 
-                progress_args = (
-                    'Dosyan Yükleniyor!',
-                    text1,
-                    start_time
-                    ),
-                video = video,
-                caption = caption,
-                duration = duration,
-                thumb = thumb,
-                width = width,
-                height = height,
-                supports_streaming=True)
-            await filmdongug(bot, message, id, son_id, kanal_id, text1)
+            await userbot.copy_message(
+                chat_id=DEPO, 
+                from_chat_id=kanal_id, 
+                message_id=int(id))
+            await filmdongu(bot, message, id, son_id, kanal_id, text1)
     except Exception as e:
         await message.reply_text(e)
 
