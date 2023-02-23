@@ -4,6 +4,8 @@ import random
 import asyncio
 from unidecode import unidecode
 import time
+import math 
+PRGRS = {}
 
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
