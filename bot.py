@@ -72,7 +72,7 @@ async def filmg(bot, message):
         if len(text) < 4:
             await message.reply_text("Hatalı Kullanım")
             return
-        kanal_id = int(text[1])
+        kanal_id = str(text[1])
         id = int(text[2])
         son_id = text[3]
         print(kanal_id) 
