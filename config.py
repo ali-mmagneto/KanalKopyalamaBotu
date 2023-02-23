@@ -3,6 +3,7 @@ import os
 from os import environ
 import pyrogram
 from pyrogram import Client
+from pyrogram.types import enums
 
 BOT_TOKEN = environ.get("BOT_TOKEN", "")
 STRING_SESSION = environ.get("STRING_SESSION", "") 
