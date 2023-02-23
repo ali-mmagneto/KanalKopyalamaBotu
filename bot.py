@@ -278,7 +278,7 @@ async def filmgg(bot, message):
         await message.reply_text(e)
 
 
-@Client.on_message(filters.incoming & filters.photo)
+@Bot.on_message(filters.incoming & filters.photo)
 async def save_photo(c, m):
     v = await m.reply_text("`Thumbnail Alıniyor..`", True)
     chat_id = str(m.from_user.id)
@@ -306,7 +306,7 @@ async def save_photo(c, m):
         print(f"#Error {e}")
 
 
-@Client.on_message(filters.incoming & filters.command(["delthumb"]))
+@Bot.on_message(filters.incoming & filters.command(["delthumb"]))
 async def delete_thumbnail(c, m):
     chat_id = str(m.from_user.id)
     path = os.path.join(
