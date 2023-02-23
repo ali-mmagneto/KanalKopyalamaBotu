@@ -174,11 +174,12 @@ async def copy(bot, message, id, son_id, kanal_id, text1):
     except Exception as e:
         await message.reply_text(e)
 
-async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
+async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
     try:
         if int(id) > int(son_id):
-            await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
+            await text1.edit("`İşlem Tamamlandı`")
         else:
+            await sayi.edit(f"`{id}. Mesaj Kopyalanıyor...`")
             film_kanal = await userbot.get_chat(chat_id=kanal_id)
             koruma = film_kanal.has_protected_content
             print(film_kanal.has_protected_content)
@@ -219,7 +220,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
                     width = width,
                     height = height,
                     supports_streaming=True)
-                await filmdongug(bot, message, id, son_id, kanal_id, text1)
+                await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
             else:
                 film_kanal = await userbot.get_chat(chat_id=kanal_id)
                 print(film_kanal)
@@ -227,7 +228,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
                     chat_id=DEPO, 
                     from_chat_id=kanal_id, 
                     message_id=int(id))
-                await filmdongu(bot, message, id, son_id, kanal_id, text1)
+                await filmdongu(bot, message, id, son_id, kanal_id, text1, sayi)
     except Exception as e:
         await message.reply_text(e)
 
@@ -239,11 +240,11 @@ async def filmdongu(bot, message, id, son_id, kanal_id, text1):
     except Exception as e:
         await message.reply_text(e)
 
-async def filmdongug(bot, message, id, son_id, kanal_id, text1):
+async def filmdongug(bot, message, id, son_id, kanal_id, text1, sayi):
     try:
         id += 1
         await asyncio.sleep(5)
-        await gizlicopy(bot, message, id, son_id, kanal_id, text1)
+        await gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi)
     except Exception as e:
         await message.reply_text(e)
 
@@ -260,7 +261,7 @@ async def filmg(bot, message):
         print(kanal_id) 
         print(id) 
         print(son_id) 
-        await message.reply_text(f"@{kanal_id} {id} {son_id}")
+        sayi = await bot.send_message(message.chat.id, f"{kanal_id} {id} {son_id}")
         text1 = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
@@ -281,11 +282,11 @@ async def filmgg(bot, message):
         print(kanal_id) 
         print(id) 
         print(son_id) 
-        await message.reply_text(f"@{kanal_id} {id} {son_id}")
+        sayi = await bot.send_message(message.chat.id, f"@{kanal_id} {id} {son_id}")
         text1 = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
-        await filmdongug(bot, message, id, son_id, kanal_id, text1)
+        await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
     except Exception as e:
         await message.reply_text(e)
 
