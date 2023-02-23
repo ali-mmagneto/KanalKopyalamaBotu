@@ -3,7 +3,7 @@ from config import BOT_TOKEN, APP_ID, API_HASH, DEPO, userbot
 import random
 import asyncio
 from unidecode import unidecode
-i
+
 Bot = Client("RanmFilmBot", api_id=APP_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 async def copy(bot, message, id, son_id, kanal_id):
