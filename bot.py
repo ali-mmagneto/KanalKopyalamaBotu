@@ -228,7 +228,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                     chat_id=DEPO, 
                     from_chat_id=kanal_id, 
                     message_id=int(id))
-                await filmdongu(bot, message, id, son_id, kanal_id, text1, sayi)
+                await filmdongug(bot, message, id, son_id, kanal_id, text1)
     except Exception as e:
         await message.reply_text(e)
 
