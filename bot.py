@@ -181,7 +181,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
         else:
             film_kanal = await userbot.get_chat(chat_id=kanal_id)
             print(film_kanal.has_protected_content)
-            if film_kanal.has_protected_content == true:
+            if film_kanal.has_protected_content == True:
                 chat_id = str(message.chat.id)
                 film_kanal = await userbot.get_chat(chat_id=kanal_id)
                 print(film_kanal)
