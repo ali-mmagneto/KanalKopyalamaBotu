@@ -199,6 +199,14 @@ async def filmdongu(bot, message, id, son_id, kanal_id, text1):
     try:
         id += 1
         await asyncio.sleep(5)
+        await copy(bot, message, id, son_id, kanal_id, text1)
+    except Exception as e:
+        await message.reply_text(e)
+
+async def filmdongug(bot, message, id, son_id, kanal_id, text1):
+    try:
+        id += 1
+        await asyncio.sleep(5)
         await gizlicopy(bot, message, id, son_id, kanal_id, text1)
     except Exception as e:
         await message.reply_text(e)
@@ -241,7 +249,7 @@ async def filmg(bot, message):
         text1 = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
-        await filmdongu(bot, message, id, son_id, kanal_id, text1)
+        await filmdongug(bot, message, id, son_id, kanal_id, text1)
     except Exception as e:
         await message.reply_text(e)
     
