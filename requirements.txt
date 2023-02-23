@@ -3,3 +3,4 @@ TgCrypto
 asyncio
 unidecode
 ffmpeg-python
+hachoir
