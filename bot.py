@@ -180,6 +180,8 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
             film_kanal = await userbot.get_chat(chat_id=kanal_id)
+            koruma = film_kanal.has_protected_content
+            await message.reply_text(f"{koruma}")
             print(film_kanal.has_protected_content)
             if film_kanal.has_protected_content == True:
                 chat_id = str(message.chat.id)
