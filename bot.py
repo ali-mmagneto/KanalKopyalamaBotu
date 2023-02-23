@@ -21,26 +21,40 @@ async def copy(bot, message, id, son_id, kanal_id):
     except Exception as e:
         await message.reply_text(e)
 
-async def gizlicopy(bot, message, id, son_id, kanal_id):
+async def gizlicopy(bot, message, id, son_id, kanal_id, mes):
     try:
         if int(id) > int(son_id):
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
-            film_kanal = await bot.get_chat(chat_id=kanal_id)
+            film_kanal = await userbot.get_chat(chat_id=kanal_id)
             print(film_kanal)
-            await userbot.copy_message(
-                chat_id=DEPO, 
-                from_chat_id=kanal_id, 
-                message_id=int(id))
-            await filmdongu(bot, message, id, son_id, kanal_id)
+            msg = await userbot.get_messages(kanal_id, id)
+            caption = msg.caption
+            start_time = time.time()
+            video = await userbot.download_media(
+                message = msg,
+                progress=progress_bar,
+                progress_args=("`İndiriliyor...`", text, start_time))
+            await userbot.send_video(
+                chat_id = DEPO,
+                progress = progress_bar, 
+                progress_args = (
+                    'Dosyan Yükleniyor!',
+                    text,
+                    start_time
+                    ),
+                video = video,
+                caption = caption,
+                supports_streaming=True)
+            await filmdongu(bot, message, id, son_id, kanal_id, text)
     except Exception as e:
         await message.reply_text(e)
 
-async def filmdongu(bot, message, id, son_id, kanal_id):
+async def filmdongu(bot, message, id, son_id, kanal_id, text):
     try:
         id += 1
         await asyncio.sleep(5)
-        await gizlicopy(bot, message, id, son_id, kanal_id)
+        await gizlicopy(bot, message, id, son_id, kanal_id, text)
     except Exception as e:
         await message.reply_text(e)
 
@@ -61,7 +75,7 @@ async def filmg(bot, message):
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
-        await filmdongu(bot, message, id, son_id, kanal_id)
+        await filmdongu(bot, message, id, son_id, kanal_id, text)
     except Exception as e:
         await message.reply_text(e)
 
@@ -82,7 +96,7 @@ async def filmg(bot, message):
         text = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
-        await filmdongu(bot, message, id, son_id, kanal_id)
+        await filmdongu(bot, message, id, son_id, kanal_id, text)
     except Exception as e:
         await message.reply_text(e)
     
