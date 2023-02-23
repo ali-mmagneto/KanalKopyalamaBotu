@@ -261,7 +261,7 @@ async def filmg(bot, message):
         print(id) 
         print(son_id) 
         await message.reply_text(f"@{kanal_id} {id} {son_id}")
-        text = await bot.send_message(
+        text1 = await bot.send_message(
             chat_id=message.chat.id,
             text="`Filmleri Kopyalıyorum Bekle`")
         await filmdongu(bot, message, id, son_id, kanal_id, text1)
