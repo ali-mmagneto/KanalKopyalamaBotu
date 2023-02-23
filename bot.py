@@ -83,7 +83,7 @@ async def copy(bot, message, id, son_id, kanal_id):
     except Exception as e:
         await message.reply_text(e)
 
-async def gizlicopy(bot, message, id, son_id, kanal_id, mes):
+async def gizlicopy(bot, message, id, son_id, kanal_id, text):
     try:
         if int(id) > int(son_id):
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
