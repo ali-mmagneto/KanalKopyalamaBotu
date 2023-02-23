@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from config import BOT_TOKEN, APP_ID, API_HASH, DEPO, userbot
+from config import BOT_TOKEN, APP_ID, API_HASH, DEPO, userbot, DOWNLOAD_DIR
 import random
 import asyncio
 from unidecode import unidecode
@@ -19,7 +19,15 @@ import asyncio
 from subprocess import check_output
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+import logging
 
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+from PIL import Image
+
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
 def ReadableTime(seconds: int) -> str:
@@ -171,6 +179,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
         if int(id) > int(son_id):
             await bot.send_message(message.chat.id, "`İşlem Tamamlandı`")
         else:
+            chat_id = str(message.chat.id)
             film_kanal = await userbot.get_chat(chat_id=kanal_id)
             print(film_kanal)
             msg = await userbot.get_messages(kanal_id, id)
@@ -180,6 +189,17 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
                 message = msg,
                 progress=progress_bar,
                 progress_args=("`İndiriliyor...`", text1, start_time))
+            duration = get_duration(video)
+            thumb_image_path = os.path.join(
+                DOWNLOAD_DIR,
+                chat_id,
+                chat_id + ".jpg"
+            )
+            if os.path.exists(thumb_image_path):
+                thumb = thumb_image_path
+            else:
+                thumb = get_thumbnail(video, './' + DOWNLOAD_DIR, duration / 4)
+            width, height = get_width_height(video)
             await userbot.send_video(
                 chat_id = DEPO,
                 progress = progress_bar, 
@@ -190,8 +210,12 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1):
                     ),
                 video = video,
                 caption = caption,
+                duration = duration,
+                thumb = thumb,
+                width = width,
+                height = height,
                 supports_streaming=True)
-            await filmdongu(bot, message, id, son_id, kanal_id, text1)
+            await filmdongug(bot, message, id, son_id, kanal_id, text1)
     except Exception as e:
         await message.reply_text(e)
 
@@ -233,7 +257,7 @@ async def filmg(bot, message):
         await message.reply_text(e)
 
 @Bot.on_message(filters.command("gizlifilm") & filters.private)
-async def filmg(bot, message):
+async def filmgg(bot, message):
     try:
         text = unidecode(message.text).split()
         if len(text) < 4:
@@ -252,5 +276,49 @@ async def filmg(bot, message):
         await filmdongug(bot, message, id, son_id, kanal_id, text1)
     except Exception as e:
         await message.reply_text(e)
-    
+
+
+@Client.on_message(filters.incoming & filters.photo)
+async def save_photo(c, m):
+    v = await m.reply_text("`Thumbnail Alıniyor..`", True)
+    chat_id = str(m.from_user.id)
+    path = os.path.join(
+        DOWNLOAD_DIR,
+        chat_id
+    )
+    thumb_image_path = os.path.join(
+        path,
+        chat_id + ".jpg"
+    )
+
+    downloaded_file_name = await m.download(
+        file_name=thumb_image_path
+    )
+    Image.open(downloaded_file_name).convert(
+        "RGB"
+    ).save(downloaded_file_name)
+    # ref: https://t.me/PyrogramChat/44663
+    img = Image.open(downloaded_file_name)
+    img.save(thumb_image_path, "JPEG")
+    try:
+        await v.edit_text("`Thumbnail Kaydedildi 😜`.")
+    except Exception as e:
+        print(f"#Error {e}")
+
+
+@Client.on_message(filters.incoming & filters.command(["delthumb"]))
+async def delete_thumbnail(c, m):
+    chat_id = str(m.from_user.id)
+    path = os.path.join(
+        DOWNLOAD_DIR,
+        chat_id
+    )
+    thumb_image_path = os.path.join(
+        path,
+        chat_id + ".jpg"
+    )
+    if os.path.exists(thumb_image_path):
+        os.remove(thumb_image_path)
+    await m.reply_text("`Thumbnail Silindi.`", quote=True)
+
 Bot.run()
