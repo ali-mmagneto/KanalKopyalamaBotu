@@ -4,3 +4,4 @@ asyncio
 unidecode
 ffmpeg-python
 hachoir
+pillow
