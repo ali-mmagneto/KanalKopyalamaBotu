@@ -195,51 +195,75 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                     message = msg,
                     progress=progress_bar,
                     progress_args=("`İndiriliyor...`", text1, start_time))
-                duration = get_duration(video)
-                thumb_image_path = os.path.join(
-                    DOWNLOAD_DIR,
-                    chat_id,
-                    chat_id + ".jpg"
-                )
-                if os.path.exists(thumb_image_path):
-                    thumb = thumb_image_path
-                else:
-                    thumb = get_thumbnail(video, './' + DOWNLOAD_DIR, duration / 4)
-                width, height = get_width_height(video)
-                file_size = os.stat(video).st_size
-                if file_size > 2093796556:
-                    await userbot.send_video(
-                        chat_id = DEPO,
-                        progress = progress_bar, 
-                        progress_args = (
-                            'Dosyan Yükleniyor!',
-                            text1,
-                            start_time
-                            ),
-                        video = video,
-                        caption = caption,
-                        duration = duration,
-                        thumb = thumb,
-                        width = width,
-                        height = height,
-                        supports_streaming=True)
+                if video.video:
+                    duration = get_duration(video)
+                    thumb_image_path = os.path.join(
+                        DOWNLOAD_DIR,
+                        chat_id,
+                        chat_id + ".jpg"
+                    )
+                    if os.path.exists(thumb_image_path):
+                        thumb = thumb_image_path
+                    else:
+                        thumb = get_thumbnail(video, './' + DOWNLOAD_DIR, duration / 4)
+                    width, height = get_width_height(video)
+                    file_size = os.stat(video).st_size
+                    if file_size > 2093796556:
+                        await userbot.send_video(
+                            chat_id = DEPO,
+                            progress = progress_bar, 
+                            progress_args = (
+                                'Dosyan Yükleniyor!',
+                                text1,
+                                start_time
+                                ),
+                            video = video,
+                            caption = caption,
+                            duration = duration,
+                            thumb = thumb,
+                            width = width,
+                            height = height,
+                            supports_streaming=True)
+                        await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                    else:
+                        await bot.send_video(
+                            chat_id = DEPO,
+                            progress = progress_bar, 
+                            progress_args = (
+                                'Dosyan Yükleniyor!',
+                                text1,
+                                start_time
+                                ),
+                            video = video,
+                            caption = caption,
+                            duration = duration,
+                            thumb = thumb,
+                            width = width,
+                            height = height,
+                            supports_streaming=True)
+                        await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                elif video.photo:
+                    await bot.send_photo(
+                        chat_id = DEPO, 
+                        photo = video, 
+                        caption = caption)
                     await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                elif video.document:
+                    file_size = os.stat(video).st_size
+                    if file_size > 2093796556:
+                        await userbot.send_document(
+                            chat_id = DEPO, 
+                            document = video, 
+                            caption = caption)
+                        await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                    else:
+                        await bot.send_document(
+                            chat_id = DEPO, 
+                            document = video, 
+                            caption = caption)
+                        await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
                 else:
-                    await bot.send_video(
-                        chat_id = DEPO,
-                        progress = progress_bar, 
-                        progress_args = (
-                            'Dosyan Yükleniyor!',
-                            text1,
-                            start_time
-                            ),
-                        video = video,
-                        caption = caption,
-                        duration = duration,
-                        thumb = thumb,
-                        width = width,
-                        height = height,
-                        supports_streaming=True)
+                    await bot.send_message(message.chat.id, f"`{id}. Mesajın ne tür olduğunu bilmiyorum özür dilerim 😭😭`")
                     await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
             else:
                 film_kanal = await userbot.get_chat(chat_id=kanal_id)
