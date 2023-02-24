@@ -195,7 +195,8 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                     message = msg,
                     progress=progress_bar,
                     progress_args=("`İndiriliyor...`", text1, start_time))
-                if video.video:
+                
+                if msg.video:
                     duration = get_duration(video)
                     thumb_image_path = os.path.join(
                         DOWNLOAD_DIR,
@@ -242,7 +243,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                             height = height,
                             supports_streaming=True)
                         await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
-                elif video.document:
+                elif msg.document:
                     file_size = os.stat(video).st_size
                     if file_size > 2093796556:
                         await userbot.send_document(
