@@ -242,12 +242,6 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                             height = height,
                             supports_streaming=True)
                         await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
-                elif video.photo:
-                    await bot.send_photo(
-                        chat_id = DEPO, 
-                        photo = video, 
-                        caption = caption)
-                    await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
                 elif video.document:
                     file_size = os.stat(video).st_size
                     if file_size > 2093796556:
