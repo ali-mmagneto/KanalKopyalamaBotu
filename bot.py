@@ -178,6 +178,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
     try:
         if int(id) > int(son_id):
             await text1.edit("`İşlem Tamamlandı`")
+            await sayi.edit("`İşlem Tamamlandı..`")
         else:
             await sayi.edit(f"`{id}. Mesaj Kopyalanıyor...`")
             film_kanal = await userbot.get_chat(chat_id=kanal_id)
@@ -205,22 +206,41 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                 else:
                     thumb = get_thumbnail(video, './' + DOWNLOAD_DIR, duration / 4)
                 width, height = get_width_height(video)
-                await userbot.send_video(
-                    chat_id = DEPO,
-                    progress = progress_bar, 
-                    progress_args = (
-                        'Dosyan Yükleniyor!',
-                        text1,
-                        start_time
-                        ),
-                    video = video,
-                    caption = caption,
-                    duration = duration,
-                    thumb = thumb,
-                    width = width,
-                    height = height,
-                    supports_streaming=True)
-                await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                file_size = os.stat(video).st_size
+                if file_size > 2093796556:
+                    await userbot.send_video(
+                        chat_id = DEPO,
+                        progress = progress_bar, 
+                        progress_args = (
+                            'Dosyan Yükleniyor!',
+                            text1,
+                            start_time
+                            ),
+                        video = video,
+                        caption = caption,
+                        duration = duration,
+                        thumb = thumb,
+                        width = width,
+                        height = height,
+                        supports_streaming=True)
+                    await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                else:
+                    await bot.send_video(
+                        chat_id = DEPO,
+                        progress = progress_bar, 
+                        progress_args = (
+                            'Dosyan Yükleniyor!',
+                            text1,
+                            start_time
+                            ),
+                        video = video,
+                        caption = caption,
+                        duration = duration,
+                        thumb = thumb,
+                        width = width,
+                        height = height,
+                        supports_streaming=True)
+                    await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
             else:
                 film_kanal = await userbot.get_chat(chat_id=kanal_id)
                 print(film_kanal)
