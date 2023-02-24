@@ -334,7 +334,7 @@ async def filmgg(bot, message):
         await message.reply_text(e)
 
 
-@Bot.on_message(filters.incoming & filters.photo)
+@Bot.on_message(filters.incoming & filters.photo & filters.private)
 async def save_photo(c, m):
     v = await m.reply_text("`Thumbnail Alıniyor..`", True)
     chat_id = str(m.from_user.id)
