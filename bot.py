@@ -189,10 +189,10 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                 film_kanal = await userbot.get_chat(chat_id=kanal_id)
                 print(film_kanal)
                 msg = await userbot.get_messages(kanal_id, id)
-                caption = msg.caption
                 start_time = time.time()
                 
                 if msg.video:
+                    caption = msg.caption
                     video = await userbot.download_media(
                         message = msg,
                         progress=progress_bar,
@@ -244,6 +244,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                             supports_streaming=True)
                         await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
                 elif msg.document:
+                    caption = msg.caption
                     video = await userbot.download_media(
                         message = msg,
                         progress=progress_bar,
@@ -261,6 +262,21 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                             document = video, 
                             caption = caption)
                         await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                elif msg.text:
+                    text = msg.text
+                    await userbot.send_message(
+                        chat_id = DEPO, 
+                        text = text) 
+                    await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
+                elif msg.photo:
+                    caption = msg.caption
+                    photo = await userbot.download_media(
+                                message = msg)
+                    await userbot.send_photo
+                        chat_id = DEPO, 
+                        photo = photo, 
+                        caption = caption) 
+                    await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
                 else:
                     await bot.send_message(message.chat.id, f"`{id}. Mesajın ne tür olduğunu bilmiyorum özür dilerim 😭😭`")
                     await filmdongug(bot, message, id, son_id, kanal_id, text1, sayi)
