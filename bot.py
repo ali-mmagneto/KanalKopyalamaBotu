@@ -272,7 +272,7 @@ async def gizlicopy(bot, message, id, son_id, kanal_id, text1, sayi):
                     caption = msg.caption
                     photo = await userbot.download_media(
                                 message = msg)
-                    await userbot.send_photo
+                    await userbot.send_photo(
                         chat_id = DEPO, 
                         photo = photo, 
                         caption = caption) 
